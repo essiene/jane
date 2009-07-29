@@ -1,0 +1,94 @@
+Introduction
+============
+
+Jane is my first real quasi-real programming which will
+at least be usefull in some contexts and also introduce 
+at least one of my own unique constructs which I have
+borrowed and refined from other languages.
+
+
+Jane is built with flex and bison, with the backend coded
+in C, and it currently compiles to C.
+
+The Jane language is basically a glorified calculator, or
+what ever you want to call a language that ONLY OPERATES
+on integers. The intent is to allow simple input, integer 
+operations and output.
+
+If its not yet clear, Jane is currently a crystallization of
+many lots of tutorials over the years, so I need a simple 
+goal to make me simply push out a programming language first.
+
+After jane, I hope to make a more full featured language.
+
+But first... jane :)
+
+
+
+Language Constructs 
+======================
+
+Declaration:
+    a := 1;
+    b := 5;
+
+Assignment:
+    a = a + 1;
+    b = a + 3;
+
+Expressions:
+    a + 1 * 3 / 4;
+
+Operators:
+    + - * /
+
+Output:
+    print a;
+    print 5 * 3;
+    print x - 5 * 33;
+
+Loops:
+    a := 5;
+
+    while a {
+        print a;
+        a = a - 1;
+    }
+
+// We don't support break and continue in loops yet
+
+Conditionals:
+    In construction
+
+/*match sum % 2 {
+    0 {
+        print "sum is even";
+    }
+
+    any {
+    }
+
+    none {
+        print "sum is odd";
+    }
+}
+
+statement_match:
+    TOK_MATCH expression TOK_OBRACE
+        match_clauses
+    TOK_EBRACE
+    ;
+
+match_clauses:
+    match_clause match_clauses
+    |
+    match_clause;
+
+match_clause:
+    expression TOK_OBRACE statements TOK_EBRACE
+    | 
+    TOK_ANY TOK_OBRACE statements TOK_EBRACE
+    |
+    TOK_NONE TOK_OBRACE statements TOK_EBRACE
+    ;
+*/
