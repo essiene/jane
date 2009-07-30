@@ -1,23 +1,23 @@
-a = 5;
-b = 6;
-c = 7;
+a := 5;
+b := 6;
+c := 7;
 
+print a;
+print b;
 print c;
 
-e = b * c - 17;
+e := a + b - c;
 
-print e * c - 5;
+print e * 2 - 5;
 
-d = 10;
+d := 10;
 
-while d {
+while d > 0 && 1 <= 5 {
     d = d - 1;
     print d;
-    stop;
 }
 
-while d {
-    d = d - 1;
+while d < 15 {
+    d = d + 1;
     print d;
-    next;
 }
