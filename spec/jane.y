@@ -103,13 +103,57 @@ statement_next:
               TOK_NEXT { $<astop>$ = astop_new(OP_NEXT, NULL, NULL); }
               ;
 
-expression:
-          expression TOK_ADD factor { $<astval>$ = astval_op_new(astop_new(OP_ADD, $<astval>1, $<astval>3));}
+expression_boolean: 
+                  expression_boolean TOK_AND factor_boolean {
+                    $<astval>$ = astval_op_new(astop_new(OP_AND, $<astval>1, $<astval>3));
+                  }
+                  |
+                  expression_boolean TOK_OR factor_boolean {
+                    $<astval>$ = astval_op_new(astop_new(OP_OR, $<astval>1, $<astval>3));
+                  }
+                  |
+                  TOK_NOT factor_boolean {
+                    $<astval>$ = astval_op_new(astop_new(OP_NOT, $<astval>1, NULL));
+                  }
+                  |
+                  factor_boolean { $<astval>$ = $<astval>1; }
+                  ;
+
+expression_arithmetic:
+          expression_arithmetic TOK_ADD factor { $<astval>$ = astval_op_new(astop_new(OP_ADD, $<astval>1, $<astval>3));}
           |
-          expression TOK_SUB factor { $<astval>$ = astval_op_new(astop_new(OP_SUB, $<astval>1, $<astval>3));}
+          expression_arithmetic TOK_SUB factor { $<astval>$ = astval_op_new(astop_new(OP_SUB, $<astval>1, $<astval>3));}
           |
           factor { $<astval>$ = $<astval>1; }
           ;
+
+factor_boolean:
+                  expression_arithmetic TOK_EQUAL expression_arithmetic { 
+                    $<astval>$ = astval_op_new(astop_new(OP_EQUAL, $<astval>1, $<astval>3));
+                  }
+                  |
+                  expression_arithmetic TOK_NOT_EQUAL expression_arithmetic { 
+                    $<astval>$ = astval_op_new(astop_new(OP_NOT_EQUAL, $<astval>1, $<astval>3));
+                  }
+                  |
+                  expression_arithmetic TOK_GREATER expression_arithmetic { 
+                    $<astval>$ = astval_op_new(astop_new(OP_GREATER, $<astval>1, $<astval>3));
+                  }
+                  |
+                  expression_arithmetic TOK_LESS expression_arithmetic { 
+                    $<astval>$ = astval_op_new(astop_new(OP_LESS, $<astval>1, $<astval>3));
+                  }
+                  |
+                  expression_arithmetic TOK_GREATER_EQUAL expression_arithmetic { 
+                    $<astval>$ = astval_op_new(astop_new(OP_GREATER_EQUAL, $<astval>1, $<astval>3));
+                  }
+                  |
+                  expression_arithmetic TOK_LESS_EQUAL expression_arithmetic { 
+                    $<astval>$ = astval_op_new(astop_new(OP_LESS_EQUAL, $<astval>1, $<astval>3));
+                  }
+                  |
+                  TOK_BOOLEAN { $<astval>$ = astval_boolean_new($<number>1); } 
+                  ;
 
 factor:
       factor TOK_MUL atom { $<astval>$ = astval_op_new(astop_new(OP_MUL, $<astval>1, $<astval>3)); }
