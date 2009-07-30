@@ -13,4 +13,11 @@ d = 10;
 while d {
     d = d - 1;
     print d;
+    stop;
+}
+
+while d {
+    d = d - 1;
+    print d;
+    next;
 }
