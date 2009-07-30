@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include <ast.h>
 
+#define COMPILE_BINARY_EXPRESSION(Op, COpr) \
+    AstVal rval = astop_rval_get(Op); \
+    compile_astval(rval);\
+    printf(COpr);\
+    AstVal lval = astop_lval_get(Op);\
+    compile_astval(lval);\
+    if (1);
+
 void compile_astval(AstVal val)
 {
     switch(astval_type_get(val)) {
@@ -19,46 +27,70 @@ void compile_astval(AstVal val)
 
 void compile_add(AstOp op)
 {
-    AstVal rval = astop_rval_get(op);
-    compile_astval(rval);
-
-    printf(" + ");
-
-    AstVal lval = astop_lval_get(op);
-    compile_astval(lval);
+    COMPILE_BINARY_EXPRESSION(op, "+");
 }
 
 void compile_sub(AstOp op)
 {
-    AstVal rval = astop_rval_get(op);
-    compile_astval(rval);
-
-    printf(" - ");
-
-    AstVal lval = astop_lval_get(op);
-    compile_astval(lval);
+    COMPILE_BINARY_EXPRESSION(op, "-");
 }
 
 void compile_mul(AstOp op)
 {
-    AstVal rval = astop_rval_get(op);
-    compile_astval(rval);
-
-    printf(" * ");
-
-    AstVal lval = astop_lval_get(op);
-    compile_astval(lval);
+    COMPILE_BINARY_EXPRESSION(op, "*");
 }
 
 void compile_div(AstOp op)
 {
+    COMPILE_BINARY_EXPRESSION(op, "/");
+}
+
+void compile_greater(AstOp op)
+{
+    COMPILE_BINARY_EXPRESSION(op, ">");
+}
+
+void compile_less(AstOp op)
+{
+    COMPILE_BINARY_EXPRESSION(op, "<");
+}
+
+void compile_equal(AstOp op)
+{
+    COMPILE_BINARY_EXPRESSION(op, "==");
+}
+
+void compile_greater_equal(AstOp op)
+{
+    COMPILE_BINARY_EXPRESSION(op, ">=");
+}
+
+void compile_less_equal(AstOp op)
+{
+    COMPILE_BINARY_EXPRESSION(op, "<=");
+}
+
+void compile_not_equal(AstOp op)
+{
+    COMPILE_BINARY_EXPRESSION(op, "!=");
+}
+
+void compile_and(AstOp op)
+{
+    COMPILE_BINARY_EXPRESSION(op, "&&");
+}
+
+void compile_or(AstOp op)
+{
+    COMPILE_BINARY_EXPRESSION(op, "||");
+}
+
+void compile_not(AstOp op)
+{
+    printf("!");
     AstVal rval = astop_rval_get(op);
     compile_astval(rval);
 
-    printf(" / ");
-
-    AstVal lval = astop_lval_get(op);
-    compile_astval(lval);
 }
 
 void compile_declare(AstOp op)
