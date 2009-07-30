@@ -52,7 +52,7 @@ void compile_modulo(AstOp op)
 
 void compile_pow(AstOp op)
 {
-    printf("pow(");
+    printf("(int) pow(");
 
     AstVal rval = astop_rval_get(op); 
     compile_astval(rval);
