@@ -28,6 +28,13 @@ AstVal astval_number_new(int n)
     return a;
 }
 
+AstVal astval_boolean_new(int n)
+{
+    ASTTYPE_NEW(AstVal, BOOLEAN, a);
+    a->value.number = n;
+    return a;
+}
+
 AstVal astval_op_new(AstOp op)
 {
     ASTTYPE_NEW(AstVal, OP, a);
@@ -60,6 +67,15 @@ void astval_printf(AstVal a)
     switch(a->type) {
         case IDENTIFIER: printf("<IDENTIFIER: %s>", a->value.string);break;
         case NUMBER: printf("<NUMBER: %d>", a->value.number);break;
+        case BOOLEAN: {
+            if(a->value.number) {
+                printf("<BOOLEAN: true>");
+                break;
+            } else {
+                printf("<BOOLEAN: false>");
+                break;
+            }
+        }
         case OP: printf("<");astop_printf(a->value.op);printf(">");break;
     }
 }

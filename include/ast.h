@@ -14,6 +14,7 @@ typedef struct _AstOp* AstOp;
 typedef enum {
     OP,
     NUMBER,
+    BOOLEAN,
     IDENTIFIER
 } AstValType;
 
@@ -32,6 +33,7 @@ typedef enum {
 
 AstVal astval_identifier_new(const char*);
 AstVal astval_number_new(int);
+AstVal astval_boolean_new(int);
 AstVal astval_op_new(AstOp);
 AstValType astval_type_get(AstVal);
 int astval_number_get(AstVal);

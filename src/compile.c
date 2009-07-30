@@ -6,6 +6,13 @@ void compile_astval(AstVal val)
     switch(astval_type_get(val)) {
         case IDENTIFIER: printf("%s ", astval_string_get(val));break;
         case NUMBER: printf("%d ", astval_number_get(val));break;
+        case BOOLEAN: if(astval_number_get(val)) { 
+            printf("true "); 
+            break; 
+        } else {
+            printf("false ");
+            break;
+        }
         case OP: compile_op(astval_op_get(val));break;
     }
 }
@@ -83,6 +90,15 @@ void compile_print(AstOp op)
     switch(astval_type_get(rval)) {
         case IDENTIFIER: printf("printf(\"%%d\\n\",%s) ", astval_string_get(rval));break;
         case NUMBER: printf("printf(\"%d\\n\") ", astval_number_get(rval));break;
+        case BOOLEAN: {
+            if(astval_number_get(rval)) {
+                printf("printf(\"true\\n\") ");
+                break;
+            } else {
+                printf("printf(\"false\\n\") ");
+                break;
+            }
+        }
         case OP: 
                      printf("printf(\"%%d\\n\",");
                      compile_op(astval_op_get(rval));
