@@ -22,6 +22,8 @@ false                       yylval.number=0;return TOK_BOOLEAN;
 \+                          return TOK_ADD;
 \-                          return TOK_SUB;
 \*                          return TOK_MUL;
+\%                          return TOK_MODULO;
+\^                          return TOK_POW;
 \/                          return TOK_DIV;
 \>                          return TOK_GREATER;
 \<                          return TOK_LESS;
