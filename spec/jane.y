@@ -70,7 +70,7 @@ statement:
          ;
 
 statement_declare:
-                     TOK_IDENTIFIER TOK_DECLARE expression  {
+                     TOK_IDENTIFIER TOK_DECLARE expression_arithmetic  {
                         AstVal iden = astval_identifier_new($<string>1);
                         AstOp op = astop_new(OP_DECLARE, iden, $<astval>3);
                         $<astop>$ = op;
@@ -78,7 +78,7 @@ statement_declare:
                      ;
 
 statement_assignment:
-                     TOK_IDENTIFIER TOK_ASSIGN expression  {
+                     TOK_IDENTIFIER TOK_ASSIGN expression_arithmetic  {
                         AstVal iden = astval_identifier_new($<string>1);
                         AstOp op = astop_new(OP_ASSIGN, iden, $<astval>3);
                         $<astop>$ = op;
@@ -86,11 +86,11 @@ statement_assignment:
                      ;
 
 statement_print:
-               TOK_PRINT expression { $<astop>$ = astop_new(OP_PRINT, $<astval>2, NULL); }
+               TOK_PRINT expression_arithmetic { $<astop>$ = astop_new(OP_PRINT, $<astval>2, NULL); }
                ;
 
 statement_while:
-               TOK_WHILE expression TOK_OBRACE statements TOK_EBRACE {
+               TOK_WHILE expression_boolean TOK_OBRACE statements TOK_EBRACE {
                     $<astop>$ = astop_new(OP_WHILE, $<astval>2, astval_op_new($<astop>4));
                }
                ;
