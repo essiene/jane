@@ -45,6 +45,27 @@ void compile_div(AstOp op)
     COMPILE_BINARY_EXPRESSION(op, "/");
 }
 
+void compile_modulo(AstOp op)
+{
+    COMPILE_BINARY_EXPRESSION(op, "%%");
+}
+
+void compile_pow(AstOp op)
+{
+    printf("pow(");
+
+    AstVal rval = astop_rval_get(op); 
+    compile_astval(rval);
+
+    printf(",");
+
+    AstVal lval = astop_lval_get(op);
+    compile_astval(lval);
+
+    printf(")");
+}
+
+
 void compile_greater(AstOp op)
 {
     COMPILE_BINARY_EXPRESSION(op, ">");
@@ -174,6 +195,8 @@ void compile_op(AstOp op)
             case OP_SUB: compile_sub(current);break;
             case OP_MUL: compile_mul(current);break;
             case OP_DIV: compile_div(current);break;
+            case OP_MODULO: compile_modulo(current);break;
+            case OP_POW: compile_pow(current);break;
             case OP_GREATER: compile_greater(current);break;
             case OP_LESS: compile_less(current);break;
             case OP_EQUAL: compile_equal(current);break;
@@ -200,6 +223,7 @@ void compile_root(AstOp op)
 {
     printf("#include <stdio.h>\n");
     printf("#include <stdlib.h>\n");
+    printf("#include <math.h>\n");
     printf("\n");
     printf("int main()\n");
     printf("{\n");

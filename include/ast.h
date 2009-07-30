@@ -23,6 +23,8 @@ typedef enum {
     OP_SUB,
     OP_MUL,
     OP_DIV,
+    OP_MODULO,
+    OP_POW,
     OP_GREATER,
     OP_LESS,
     OP_EQUAL,

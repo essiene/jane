@@ -23,6 +23,8 @@ void astop_printf(AstOp a)
         case OP_SUB: printf("{OP_SUB: ");break;
         case OP_MUL: printf("{OP_MUL: ");break;
         case OP_DIV: printf("{OP_DIV: ");break;
+        case OP_MODULO: printf("{OP_MODULO: ");break;
+        case OP_POW: printf("{OP_POW: ");break;
         case OP_GREATER: printf("{OP_GREATER: ");break;
         case OP_LESS: printf("{OP_LESS: ");break;
         case OP_EQUAL: printf("{OP_EQUAL: ");break;
