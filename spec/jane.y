@@ -162,8 +162,16 @@ factor:
       |
       factor TOK_DIV atom { $<astval>$ = astval_op_new(astop_new(OP_DIV, $<astval>1, $<astval>3)); }
       |
+      factor TOK_MODULO atom { $<astval>$ = astval_op_new(astop_new(OP_MODULO, $<astval>1, $<astval>3)); }
+      |
+      exponential { $<astval>$ = $<astval>1; }
+      |
       atom { $<astval>$ = $<astval>1; }
       ;
+
+exponential:
+           atom TOK_POW atom { $<astval>$ = astval_op_new(astop_new(OP_POW, $<astval>1, $<astval>3)); }
+           ;
 
 atom: 
     TOK_IDENTIFIER { $<astval>$ = astval_identifier_new($<string>1); }
