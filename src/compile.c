@@ -106,6 +106,16 @@ void compile_while(AstOp op)
     printf("}\n");
 }
 
+void compile_stop(AstOp op)
+{
+    printf("break;\n");
+}
+
+void compile_next(AstOp op)
+{
+    printf("continue;\n");
+}
+
 void compile_op(AstOp op)
 {
     AstOp current = op;
@@ -120,6 +130,8 @@ void compile_op(AstOp op)
             case OP_ASSIGN: compile_assign(current);break;
             case OP_PRINT: compile_print(current);break;
             case OP_WHILE: compile_while(current);break;
+            case OP_STOP: compile_stop(current);break;
+            case OP_NEXT: compile_next(current);break;
         }
 
         current = astop_next_get(current);

@@ -25,7 +25,9 @@ typedef enum {
     OP_DECLARE,
     OP_ASSIGN,
     OP_PRINT,
-    OP_WHILE
+    OP_WHILE,
+    OP_STOP,
+    OP_NEXT
 } AstOpType;
 
 AstVal astval_identifier_new(const char*);

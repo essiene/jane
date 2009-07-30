@@ -10,6 +10,8 @@
 print                       return TOK_PRINT;
 if                          return TOK_IF;
 while                       return TOK_WHILE;
+stop                        return TOK_STOP;
+next                        return TOK_NEXT;
 \;                          return TOK_SEMI;
 \{                          return TOK_OBRACE;
 \}                          return TOK_EBRACE;

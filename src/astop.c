@@ -27,6 +27,8 @@ void astop_printf(AstOp a)
         case OP_ASSIGN: printf("{OP_ASSIGN: ");break;
         case OP_PRINT: printf("{OP_PRINT: ");break;
         case OP_WHILE: printf("{OP_WHILE: ");break;
+        case OP_STOP: printf("{OP_STOP: ");break;
+        case OP_NEXT: printf("{OP_NEXT: ");break;
     }
 
     if(a->rval != NULL) {

@@ -22,7 +22,7 @@ int main()
 %}
 
 %token TOK_DECLARE TOK_ASSIGN TOK_ADD TOK_SUB TOK_MUL TOK_DIV
-%token TOK_PRINT TOK_IF TOK_WHILE
+%token TOK_PRINT TOK_IF TOK_WHILE TOK_STOP TOK_NEXT
 %token TOK_EBRACE TOK_OBRACE TOK_SEMI
 
 %union
@@ -58,6 +58,10 @@ statement:
          statement_print TOK_SEMI { $<astop>$ = $<astop>1; }
          |
          statement_while { $<astop>$ = $<astop>1; }
+         |
+         statement_stop TOK_SEMI { $<astop>$ = $<astop>1; }
+         |
+         statement_next TOK_SEMI { $<astop>$ = $<astop>1; }
          ;
 
 statement_declare:
@@ -85,6 +89,14 @@ statement_while:
                     $<astop>$ = astop_new(OP_WHILE, $<astval>2, astval_op_new($<astop>4));
                }
                ;
+
+statement_stop:
+              TOK_STOP { $<astop>$ = astop_new(OP_STOP, NULL, NULL); }
+              ;
+
+statement_next:
+              TOK_NEXT { $<astop>$ = astop_new(OP_NEXT, NULL, NULL); }
+              ;
 
 expression:
           expression TOK_ADD factor { $<astval>$ = astval_op_new(astop_new(OP_ADD, $<astval>1, $<astval>3));}
