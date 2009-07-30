@@ -12,6 +12,10 @@ print e * 2 - 5;
 
 d := 10;
 
+print d % 9;
+
+print 2 ^ 5;
+
 while d > 0 && 1 <= 5 {
     d = d - 1;
     print d;
