@@ -142,6 +142,15 @@ void compile_op(AstOp op)
             case OP_SUB: compile_sub(current);break;
             case OP_MUL: compile_mul(current);break;
             case OP_DIV: compile_div(current);break;
+            case OP_GREATER: compile_greater(current);break;
+            case OP_LESS: compile_less(current);break;
+            case OP_EQUAL: compile_equal(current);break;
+            case OP_GREATER_EQUAL: compile_greater_equal(current);break;
+            case OP_LESS_EQUAL: compile_less_equal(current);break;
+            case OP_NOT_EQUAL: compile_not_equal(current);break;
+            case OP_AND: compile_and(current);break;
+            case OP_OR: compile_or(current);break;
+            case OP_NOT: compile_not(current);break;
             case OP_DECLARE: compile_declare(current);break;
             case OP_ASSIGN: compile_assign(current);break;
             case OP_PRINT: compile_print(current);break;
