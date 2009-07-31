@@ -53,6 +53,17 @@ Output:
     print 5 * 3;
     print x - 5 * 33;
 
+    // under contruction
+    print "A label for the print: " a + b
+
+
+Input:
+    // under construction
+    read a;
+    read b;
+    read "A prompt for the read:> " a
+
+
 Loops:
     a := 5;
 
@@ -64,19 +75,21 @@ Loops:
 // Use stop and next to replace break and stop in loops
 
 Conditionals:
-    In construction
+
+    if expression {
+        statements
+    } 
+
+    if expression {
+        statements
+    } else {
+        statements
+    }
 
 /*
-
-if expression {
-statements
-} 
-
-if expression {
- statements
-} else {
- statements
-}
+   the match statement is under contruction
+   and is going to be the preferred conditional
+   work horse
    
    
 match sum % 2 {
@@ -84,11 +97,16 @@ match sum % 2 {
         print "sum is even";
     }
 
+    1 {
+        print "you have a remainder of 1";
+    }
+     
     any {
+        print "you have at least one match";
     }
 
     none {
-        print "sum is odd";
+        print "none of your options matched";
     }
 }
 
@@ -111,3 +129,17 @@ match_clause:
     TOK_NONE TOK_OBRACE statements TOK_EBRACE
     ;
 */
+
+Functions:
+    // under construction
+
+    // declaration
+
+    fun fun_name(a, b, c) {
+    }
+
+    fun main (){
+    }
+
+    // call
+    fun_name(param, param, param);
