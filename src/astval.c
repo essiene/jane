@@ -21,6 +21,13 @@ AstVal astval_identifier_new(const char* str)
     return a;
 }
 
+AstVal astval_string_new(const char* str)
+{
+    ASTTYPE_NEW(AstVal, STRING, a);
+    a->value.string = str;
+    return a;
+}
+
 AstVal astval_number_new(int n)
 {
     ASTTYPE_NEW(AstVal, NUMBER, a);
@@ -66,6 +73,7 @@ void astval_printf(AstVal a)
 {
     switch(a->type) {
         case IDENTIFIER: printf("<IDENTIFIER: %s>", a->value.string);break;
+        case STRING: printf("<STRING: \"%s\">", a->value.string);break;
         case NUMBER: printf("<NUMBER: %d>", a->value.number);break;
         case BOOLEAN: {
             if(a->value.number) {

@@ -13,6 +13,7 @@ void compile_astval(AstVal val)
 {
     switch(astval_type_get(val)) {
         case IDENTIFIER: printf("%s ", astval_string_get(val));break;
+        case STRING: break;
         case NUMBER: printf("%d ", astval_number_get(val));break;
         case BOOLEAN: if(astval_number_get(val)) { 
             printf("true "); 
