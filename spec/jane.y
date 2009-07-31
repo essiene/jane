@@ -91,9 +91,9 @@ statement_assignment:
                      ;
 
 statement_print:
-               TOK_PRINT expression_arithmetic { $<astop>$ = astop_new(OP_PRINT, $<astval>2, NULL); }
+               TOK_PRINT TOK_STRING expression_arithmetic { $<astop>$ = astop_new(OP_PRINT, astval_string_new($<string>2), $<astval>3); }
                |
-               TOK_PRINT TOK_STRING expression_arithmetic { $<astop>$ = astop_new(OP_PRINT, $<astval>3, astval_string_new($<string>2)); }
+               TOK_PRINT expression_arithmetic { $<astop>$ = astop_new(OP_PRINT, NULL, $<astval>2); }
                ;
 
 statement_while:
