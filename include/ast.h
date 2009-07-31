@@ -15,7 +15,8 @@ typedef enum {
     OP,
     NUMBER,
     BOOLEAN,
-    IDENTIFIER
+    IDENTIFIER,
+    STRING
 } AstValType;
 
 typedef enum {
@@ -45,6 +46,7 @@ typedef enum {
 } AstOpType;
 
 AstVal astval_identifier_new(const char*);
+AstVal astval_string_new(const char*);
 AstVal astval_number_new(int);
 AstVal astval_boolean_new(int);
 AstVal astval_op_new(AstOp);
