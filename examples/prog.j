@@ -27,10 +27,19 @@ print 2 ^ 5;
 
 while d > 0 && 1 <= 5 {
     d = d - 1;
-    print d;
+    if d%2 == 0 || d%5 == 0 {
+        print d;
+    }
 }
 
 while d < 15 {
     d = d + 1;
-    print d;
+    if d%10 == 5 {
+        stop;
+    } else {
+        print d;
+        next;
+    }
 }
+
+
