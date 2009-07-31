@@ -1,6 +1,15 @@
-a := 5;
+# This is a single line comment
+a := 5; # declare a
 b := 6;
 c := 7;
+
+#
+# This is a multiline
+# Comment
+#
+# Uhh... actually its multiple
+# single line comments used
+# to simulate multiline comments :)
 
 print a;
 print b;
