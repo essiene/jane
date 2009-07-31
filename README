@@ -16,8 +16,8 @@ on integers. The intent is to allow simple input, integer
 operations and output.
 
 If its not yet clear, Jane is currently a crystallization of
-many lots of tutorials over the years, so I need a simple 
-goal to make me simply push out a programming language first.
+lots of tutorials over the years, so I need a simple goal 
+to make me simply push out a programming language first.
 
 After jane, I hope to make a more full featured language.
 
@@ -27,6 +27,10 @@ But first... jane :)
 
 Language Constructs 
 ======================
+Comments:
+# Start from the hash sign and run
+# till the end of a line
+
 
 Declaration:
     a := 1;
@@ -40,7 +44,9 @@ Expressions:
     a + 1 * 3 / 4;
 
 Operators:
-    + - * /
+    + - * / % ^
+    > < == >= <= !=
+    || && !
 
 Output:
     print a;
@@ -50,17 +56,30 @@ Output:
 Loops:
     a := 5;
 
-    while a {
+    while a != 0 {
         print a;
         a = a - 1;
     }
 
-// We don't support break and continue in loops yet
+// Use stop and next to replace break and stop in loops
 
 Conditionals:
     In construction
 
-/*match sum % 2 {
+/*
+
+if expression {
+statements
+} 
+
+if expression {
+ statements
+} else {
+ statements
+}
+   
+   
+match sum % 2 {
     0 {
         print "sum is even";
     }
