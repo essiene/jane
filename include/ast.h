@@ -37,6 +37,8 @@ typedef enum {
     OP_DECLARE,
     OP_ASSIGN,
     OP_PRINT,
+    OP_IF,
+    OP_ELSE,
     OP_WHILE,
     OP_STOP,
     OP_NEXT
