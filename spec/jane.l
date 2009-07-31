@@ -6,6 +6,7 @@
 %}
 
 %%
+\#.*\n                      ;
 [0-9]+                      yylval.number=atoi(yytext);return TOK_NUMBER;
 print                       return TOK_PRINT;
 if                          return TOK_IF;
