@@ -139,13 +139,19 @@ void compile_assign(AstOp op)
 
 void compile_print(AstOp op)
 {
-    AstVal rval = astop_rval_get(op);
+    AstVal label = astop_rval_get(op);
+    if(label != NULL) {
+        printf("printf(\"%%s\", %s);\n", astval_string_get(label));
+    }
 
-    switch(astval_type_get(rval)) {
-        case IDENTIFIER: printf("printf(\"%%d\\n\",%s) ", astval_string_get(rval));break;
-        case NUMBER: printf("printf(\"%d\\n\") ", astval_number_get(rval));break;
+    AstVal value = astop_lval_get(op);
+
+    switch(astval_type_get(value)) {
+        case IDENTIFIER: printf("printf(\"%%d\\n\",%s) ", astval_string_get(value));break;
+        case STRING: break;
+        case NUMBER: printf("printf(\"%d\\n\") ", astval_number_get(value));break;
         case BOOLEAN: {
-            if(astval_number_get(rval)) {
+            if(astval_number_get(value)) {
                 printf("printf(\"true\\n\") ");
                 break;
             } else {
@@ -155,7 +161,7 @@ void compile_print(AstOp op)
         }
         case OP: 
                      printf("printf(\"%%d\\n\",");
-                     compile_op(astval_op_get(rval));
+                     compile_op(astval_op_get(value));
                      printf(")");
                      break;
     }
