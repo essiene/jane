@@ -162,6 +162,33 @@ void compile_print(AstOp op)
     printf(";\n");
 }
 
+void compile_if(AstOp op)
+{
+    printf("if (");
+    AstVal expression = astop_rval_get(op);
+    compile_astval(expression);
+    printf(") {\n");
+
+    AstVal statments = astop_lval_get(op);
+    compile_astval(statments);
+
+    printf("}\n");
+}
+
+void compile_else(AstOp op)
+{
+    AstVal if_exp = astop_rval_get(op);
+    AstOp if_op = astval_op_get(if_exp);
+    compile_if(if_op);
+
+    printf("else {\n");
+
+    AstVal statments = astop_lval_get(op);
+    compile_astval(statments);
+
+    printf("}\n");
+}
+
 void compile_while(AstOp op)
 {
     printf("while (");
