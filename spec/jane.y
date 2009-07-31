@@ -42,6 +42,7 @@ int main()
 %token <number> TOK_NUMBER 
 %token <string> TOK_IDENTIFIER 
 %token <number> TOK_BOOLEAN
+%token <string> TOK_STRING
 
 %%
 
@@ -91,6 +92,8 @@ statement_assignment:
 
 statement_print:
                TOK_PRINT expression_arithmetic { $<astop>$ = astop_new(OP_PRINT, $<astval>2, NULL); }
+               |
+               TOK_PRINT TOK_STRING expression_arithmetic { $<astop>$ = astop_new(OP_PRINT, $<astval>3, astval_string_new($<string>2)); }
                ;
 
 statement_while:

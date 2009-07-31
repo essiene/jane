@@ -37,6 +37,7 @@ false                       yylval.number=0;return TOK_BOOLEAN;
 \&\&                        return TOK_AND;
 \!                          return TOK_NOT;
 [_a-zA-Z][_a-zA-Z0-9]*      yylval.string=strdup(yytext);return TOK_IDENTIFIER;
+\".*\"                      yylval.string=strdup(yytext);return TOK_STRING;
 \n                          ;
 [ \t]                       ;
 .                           return (int) yytext;
