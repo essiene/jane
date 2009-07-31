@@ -8,5 +8,5 @@ while current > 0  {
 
 }
 
-print sum;
+print "The sum of the first 100 numbers is = " sum;
 

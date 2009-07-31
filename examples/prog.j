@@ -28,7 +28,7 @@ print 2 ^ 5;
 while d > 0 && 1 <= 5 {
     d = d - 1;
     if d%2 == 0 || d%5 == 0 {
-        print d;
+        print "even or multiple of 5:>" d;
     }
 }
 
