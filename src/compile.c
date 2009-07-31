@@ -236,6 +236,8 @@ void compile_op(AstOp op)
             case OP_DECLARE: compile_declare(current);break;
             case OP_ASSIGN: compile_assign(current);break;
             case OP_PRINT: compile_print(current);break;
+            case OP_IF: compile_if(current);break;
+            case OP_ELSE: compile_else(current);break;
             case OP_WHILE: compile_while(current);break;
             case OP_STOP: compile_stop(current);break;
             case OP_NEXT: compile_next(current);break;
