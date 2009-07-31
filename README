@@ -53,7 +53,6 @@ Output:
     print 5 * 3;
     print x - 5 * 33;
 
-    // under contruction
     print "A label for the print: " a + b
 
 
