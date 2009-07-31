@@ -27,7 +27,7 @@ int main()
 %token TOK_GREATER TOK_LESS TOK_EQUAL TOK_GREATER_EQUAL TOK_LESS_EQUAL
 %token TOK_NOT_EQUAL TOK_OR TOK_AND TOK_NOT
 
-%token TOK_PRINT TOK_IF TOK_WHILE TOK_STOP TOK_NEXT
+%token TOK_PRINT TOK_IF TOK_ELSE TOK_WHILE TOK_STOP TOK_NEXT
 
 %token TOK_EBRACE TOK_OBRACE TOK_SEMI
 
@@ -69,6 +69,8 @@ statement:
          statement_stop TOK_SEMI { $<astop>$ = $<astop>1; }
          |
          statement_next TOK_SEMI { $<astop>$ = $<astop>1; }
+         |
+         statement_if { $<astop>$ = $<astop>1; }
          ;
 
 statement_declare:
@@ -104,6 +106,21 @@ statement_stop:
 statement_next:
               TOK_NEXT { $<astop>$ = astop_new(OP_NEXT, NULL, NULL); }
               ;
+
+statement_if:
+            TOK_IF expression_boolean TOK_OBRACE statements TOK_EBRACE {
+                    $<astop>$ = astop_new(OP_IF, $<astval>2, astval_op_new($<astop>4));
+            }
+            |
+            TOK_IF expression_boolean TOK_OBRACE 
+                statements 
+            TOK_EBRACE TOK_ELSE TOK_OBRACE
+                statements
+            TOK_EBRACE {
+                AstOp op_if = astop_new(OP_IF, $<astval>2, astval_op_new($<astop>4));
+                $<astop>$ = astop_new(OP_ELSE, astval_op_new(op_if), astval_op_new($<astop>8));
+            }
+            ;
 
 expression_boolean: 
                   expression_boolean TOK_AND factor_boolean {

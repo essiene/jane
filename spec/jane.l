@@ -10,6 +10,7 @@
 [0-9]+                      yylval.number=atoi(yytext);return TOK_NUMBER;
 print                       return TOK_PRINT;
 if                          return TOK_IF;
+else                        return TOK_ELSE;
 while                       return TOK_WHILE;
 stop                        return TOK_STOP;
 next                        return TOK_NEXT;
