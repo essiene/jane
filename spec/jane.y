@@ -1,5 +1,6 @@
 %{
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "../include/ast.h"
 #include "../src/y.tab.h"
 
@@ -13,9 +14,22 @@ int yywrap()
     return 1;
 }
 
-int main()
+int usage()
 {
+    fprintf(stderr, "Usage: janec <file.j>\n");
+}
+
+int main(int argc, char** argv)
+{
+    if(argc < 2) {
+        usage();
+        return 0;
+    }
+
+    fclose(stdin);
+    stdin = fopen(argv[1], "r"); 
     yyparse();
+
     return 0;
 }
 
