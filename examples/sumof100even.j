@@ -3,11 +3,15 @@
 # even numbers
 #
 
+print "This program prints the sum";
+print " of the first 100 even numbers";
+
 max := 100;
 sum := 0;
 current := 0;
 
-while current <= 100 {
+while current <= max {
+    current = current + 1;
 
     if current % 2 != 0 {
         print "Skipping the odd number: " current;
@@ -15,7 +19,6 @@ while current <= 100 {
     }
 
     sum = sum + current;
-    current = current + 1;
 }
 
 print "The sum of the first 100 even numbers is = " sum;
