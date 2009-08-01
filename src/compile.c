@@ -145,6 +145,10 @@ void compile_print(AstOp op)
     }
 
     AstVal value = astop_lval_get(op);
+    if(value == NULL) {
+        printf("printf(\"\\n\");\n");
+        return;
+    }
 
     switch(astval_type_get(value)) {
         case IDENTIFIER: printf("printf(\"%%d\\n\",%s) ", astval_string_get(value));break;
