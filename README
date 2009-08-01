@@ -48,30 +48,22 @@ Operators:
     > < == >= <= !=
     || && !
 
-Output:
-    print a;
-    print 5 * 3;
-    print x - 5 * 33;
-
-    print "A label for the print: " a + b
-
-
 Input:
     // under construction
     read a;
     read b;
     read "A prompt for the read:> " a
 
+Output:
+    print a;
+    print 5 * 3;
+    print x - 5 * 33;
 
-Loops:
-    a := 5;
+    print "A label for the print: " a + b;
+    
+    print "Printing just the label";
 
-    while a != 0 {
-        print a;
-        a = a - 1;
-    }
 
-// Use stop and next to replace break and stop in loops
 
 Conditionals:
 
@@ -84,6 +76,31 @@ Conditionals:
     } else {
         statements
     }
+
+Loops:
+    max := 50;
+    i := 0;
+
+    while true {
+        if i >= max {
+            stop;
+        }
+
+        i = i + 1;
+
+        if i % 2 == 0 {
+            print "even number: " i;
+            next;
+        } 
+
+        if i % 5 == 0 {
+            print "multiple of 5: " i;
+            next;
+        }
+    }
+
+// Use stop and next to replace break and stop in loops
+
 
 /*
    the match statement is under contruction
