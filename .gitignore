@@ -1,5 +1,6 @@
 ast
 jane
+janec
 *.o
 lex.yy.c
 y.tab.*

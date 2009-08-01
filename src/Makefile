@@ -1,4 +1,4 @@
-all: jane ast
+all: janec ast
 	@echo "All done"
 
 CC=gcc
@@ -7,7 +7,7 @@ CFLAGS=-Wall -I../include
 ast: ast.o astval.o astop.o compile.o
 	$(CC) -o $@ $+ -lgc
 
-jane: y.tab.c lex.yy.c astval.o astop.o compile.o
+janec: y.tab.c lex.yy.c astval.o astop.o compile.o
 	$(CC) -o $@ $+ -lgc
 
 lex.yy.c: ../spec/jane.l
