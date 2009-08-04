@@ -37,6 +37,7 @@ typedef enum {
     OP_NOT,
     OP_DECLARE,
     OP_ASSIGN,
+    OP_READ,
     OP_PRINT,
     OP_IF,
     OP_ELSE,
