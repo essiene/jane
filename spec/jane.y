@@ -48,7 +48,7 @@ int main(int argc, char** argv)
 %token TOK_GREATER TOK_LESS TOK_EQUAL TOK_GREATER_EQUAL TOK_LESS_EQUAL
 %token TOK_NOT_EQUAL TOK_OR TOK_AND TOK_NOT
 
-%token TOK_PRINT TOK_IF TOK_ELSE TOK_WHILE TOK_STOP TOK_NEXT
+%token TOK_READ TOK_PRINT TOK_IF TOK_ELSE TOK_WHILE TOK_STOP TOK_NEXT
 
 %token TOK_EBRACE TOK_OBRACE TOK_SEMI
 
@@ -84,6 +84,8 @@ statement:
          |
          statement_assignment TOK_SEMI { $<astop>$ = $<astop>1; }
          |
+         statement_read TOK_SEMI { $<astop>$ = $<astop>1; }
+         |
          statement_print TOK_SEMI { $<astop>$ = $<astop>1; }
          |
          statement_while { $<astop>$ = $<astop>1; }
@@ -109,7 +111,11 @@ statement_assignment:
                         AstOp op = astop_new(OP_ASSIGN, iden, $<astval>3);
                         $<astop>$ = op;
                      }
-                     ;
+statement_read:
+               TOK_READ TOK_STRING TOK_IDENTIFIER { $<astop>$ = astop_new(OP_READ, astval_string_new($<string>2), astval_identifier_new($<string>3)); }
+               |
+               TOK_READ TOK_IDENTIFIER { $<astop>$ = astop_new(OP_READ, NULL, astval_identifier_new($<string>2)); }
+               ;
 
 statement_print:
                TOK_PRINT TOK_STRING expression_arithmetic { $<astop>$ = astop_new(OP_PRINT, astval_string_new($<string>2), $<astval>3); }

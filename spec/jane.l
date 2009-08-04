@@ -8,6 +8,7 @@
 %%
 \#.*\n                      ;
 [0-9]+                      yylval.number=atoi(yytext);return TOK_NUMBER;
+read                        return TOK_READ;
 print                       return TOK_PRINT;
 if                          return TOK_IF;
 else                        return TOK_ELSE;
