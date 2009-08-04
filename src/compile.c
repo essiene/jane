@@ -136,6 +136,22 @@ void compile_assign(AstOp op)
 
 }
 
+void compile_read(AstOp op)
+{
+    AstVal label = astop_rval_get(op);
+    if(label != NULL) {
+        printf("printf(\"%%s\", %s);\n", astval_string_get(label));
+    }
+
+    AstVal value = astop_lval_get(op);
+    if(value == NULL) {
+        printf("printf(\"\\n\");\n");
+        return;
+    }
+
+    printf("scanf(\"%%d\", &%s);\n", astval_string_get(value));
+}
+
 void compile_print(AstOp op)
 {
     AstVal label = astop_rval_get(op);
@@ -245,6 +261,7 @@ void compile_op(AstOp op)
             case OP_NOT: compile_not(current);break;
             case OP_DECLARE: compile_declare(current);break;
             case OP_ASSIGN: compile_assign(current);break;
+            case OP_READ: compile_read(current);break;
             case OP_PRINT: compile_print(current);break;
             case OP_IF: compile_if(current);break;
             case OP_ELSE: compile_else(current);break;

@@ -36,6 +36,7 @@ void astop_printf(AstOp a)
         case OP_NOT: printf("{OP_NOT: ");break;
         case OP_DECLARE: printf("{OP_ASSIGN: ");break;
         case OP_ASSIGN: printf("{OP_ASSIGN: ");break;
+        case OP_READ: printf("{OP_READ: ");break;
         case OP_PRINT: printf("{OP_PRINT: ");break;
         case OP_IF: printf("{OP_IF: ");break;
         case OP_ELSE: printf("{OP_ELSE: ");break;
