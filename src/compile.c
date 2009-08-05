@@ -238,6 +238,78 @@ void compile_next(AstOp op)
     fprintf(stdout, "continue;\n");
 }
 
+void compile_return(AstOp op)
+{
+    fprintf(stdout, "return ");
+
+    AstVal exp = astop_rval_get(op);
+    compile_astval(exp);
+
+    fprintf(stdout, ";\n");
+}
+
+void compile_comma(AstOp op)
+{
+    AstVal left = astop_rval_get(op);
+    compile_astval(left);
+
+
+    AstVal more = astop_lval_get(op);
+    if(more == NULL) {
+        return;
+    }
+
+    fprintf(stdout, ",");
+
+    AstOp more_op = astval_op_get(more);
+    compile_op(more_op);
+}
+
+void compile_funbody(AstOp op)
+{
+    AstVal param_op = astop_rval_get(op);
+    if(param_op == NULL) {
+        fprintf(stdout, "()");
+    } else {
+
+        fprintf(stdout, "(");
+
+        AstOp params = astval_op_get(param_op);
+        compile_comma(params);
+
+        fprintf(stdout, ")");
+
+    }
+
+    fprintf(stdout, "{");
+
+    AstVal statments = astop_lval_get(op);
+    compile_astval(statments);
+
+    fprintf(stdout, "}\n");
+}
+
+void compile_fun(AstOp op)
+{
+    AstVal name = astop_rval_get(op);
+    fprintf(stdout, "int %s", astval_string_get(name));
+
+    AstVal body = astop_lval_get(op);
+    compile_funbody(astval_op_get(body));
+}
+
+void compile_call(AstOp op)
+{
+    AstVal funname = astop_rval_get(op);
+    fprintf(stdout, "%s(", astval_string_get(funname));
+
+    AstVal params_op = astop_lval_get(op);
+    AstOp params = astval_op_get(params_op);
+    compile_op(params);
+
+    fprintf(stdout, ")");
+}
+
 void compile_op(AstOp op)
 {
     AstOp current = op;
@@ -268,6 +340,11 @@ void compile_op(AstOp op)
             case OP_WHILE: compile_while(current);break;
             case OP_STOP: compile_stop(current);break;
             case OP_NEXT: compile_next(current);break;
+            case OP_RETURN: compile_return(current);break;
+            case OP_FUN: compile_fun(current);break;
+            case OP_FUNBODY: compile_funbody(current);break;
+            case OP_CALL: compile_call(current);break;
+            case OP_COMMA: compile_comma(current);break;
         }
 
         current = astop_next_get(current);
