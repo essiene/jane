@@ -16,6 +16,7 @@ while                       return TOK_WHILE;
 stop                        return TOK_STOP;
 next                        return TOK_NEXT;
 fun                         return TOK_FUN;
+return                      return TOK_RETURN;
 true                        yylval.number=1;return TOK_BOOLEAN;
 false                       yylval.number=0;return TOK_BOOLEAN;
 \;                          return TOK_SEMI;
