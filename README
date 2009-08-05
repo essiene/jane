@@ -49,7 +49,6 @@ Operators:
     || && !
 
 Input:
-    // under construction
     read a;
     read b;
     read "A prompt for the read:> " a
@@ -101,8 +100,26 @@ Loops:
 
 // Use stop and next to replace break and stop in loops
 
+Functions:
+    // declaration
 
+    fun fun_name(a, b, c) {
+    }
+
+    // There must be at least
+    // fun main() {} defined to get
+    // a proper running program
+    fun main (){
+    }
+
+    // call
+    fun_name(param, param, param);
+
+
+
+New Ideas:
 /*
+
    the match statement is under contruction
    and is going to be the preferred conditional
    work horse
@@ -146,16 +163,4 @@ match_clause:
     ;
 */
 
-Functions:
-    // under construction
 
-    // declaration
-
-    fun fun_name(a, b, c) {
-    }
-
-    fun main (){
-    }
-
-    // call
-    fun_name(param, param, param);
