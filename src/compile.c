@@ -140,12 +140,12 @@ void compile_read(AstOp op)
 {
     AstVal label = astop_rval_get(op);
     if(label != NULL) {
-        printf("printf(\"%%s\", %s);\n", astval_string_get(label));
+        fprintf(stdout, "printf(\"%%s\", %s);\n", astval_string_get(label));
     }
 
     AstVal value = astop_lval_get(op);
     if(value == NULL) {
-        printf("printf(\"\\n\");\n");
+        fprintf(stdout, "printf(\"\\n\");\n");
         return;
     }
 
