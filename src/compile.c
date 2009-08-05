@@ -149,7 +149,7 @@ void compile_read(AstOp op)
         return;
     }
 
-    printf("scanf(\"%%d\", &%s);\n", astval_string_get(value));
+    fprintf(stdout, "scanf(\"%%d\", &%s);\n", astval_string_get(value));
 }
 
 void compile_print(AstOp op)
