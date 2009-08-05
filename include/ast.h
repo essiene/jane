@@ -43,7 +43,12 @@ typedef enum {
     OP_ELSE,
     OP_WHILE,
     OP_STOP,
-    OP_NEXT
+    OP_NEXT,
+    OP_RETURN,
+    OP_FUN,
+    OP_FUNBODY,
+    OP_CALL,
+    OP_COMMA
 } AstOpType;
 
 AstVal astval_identifier_new(const char*);
