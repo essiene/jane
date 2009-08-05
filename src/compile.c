@@ -4,7 +4,7 @@
 #define COMPILE_BINARY_EXPRESSION(Op, COpr) \
     AstVal rval = astop_rval_get(Op); \
     compile_astval(rval);\
-    printf(COpr);\
+    fprintf(stdout, COpr);\
     AstVal lval = astop_lval_get(Op);\
     compile_astval(lval);\
     if (1);
@@ -12,14 +12,14 @@
 void compile_astval(AstVal val)
 {
     switch(astval_type_get(val)) {
-        case IDENTIFIER: printf("%s ", astval_string_get(val));break;
+        case IDENTIFIER: fprintf(stdout, "%s ", astval_string_get(val));break;
         case STRING: break;
-        case NUMBER: printf("%d ", astval_number_get(val));break;
+        case NUMBER: fprintf(stdout, "%d ", astval_number_get(val));break;
         case BOOLEAN: if(astval_number_get(val)) { 
-            printf("true "); 
+            fprintf(stdout, "true "); 
             break; 
         } else {
-            printf("false ");
+            fprintf(stdout, "false ");
             break;
         }
         case OP: compile_op(astval_op_get(val));break;
@@ -53,19 +53,18 @@ void compile_modulo(AstOp op)
 
 void compile_pow(AstOp op)
 {
-    printf("(int) pow(");
+    fprintf(stdout, "(int) pow(");
 
     AstVal rval = astop_rval_get(op); 
     compile_astval(rval);
 
-    printf(",");
+    fprintf(stdout, ",");
 
     AstVal lval = astop_lval_get(op);
     compile_astval(lval);
 
-    printf(")");
+    fprintf(stdout, ")");
 }
-
 
 void compile_greater(AstOp op)
 {
@@ -109,7 +108,7 @@ void compile_or(AstOp op)
 
 void compile_not(AstOp op)
 {
-    printf("!");
+    fprintf(stdout, "!");
     AstVal rval = astop_rval_get(op);
     compile_astval(rval);
 
@@ -118,22 +117,22 @@ void compile_not(AstOp op)
 void compile_declare(AstOp op)
 {
     AstVal rval = astop_rval_get(op);
-    printf("int %s = ", astval_string_get(rval)); /* an identifier */
+    fprintf(stdout, "int %s = ", astval_string_get(rval)); /* an identifier */
 
     AstVal lval = astop_lval_get(op);
     compile_astval(lval);
-    printf(";\n");
+    fprintf(stdout, ";\n");
 
 }
 
 void compile_assign(AstOp op)
 {
     AstVal rval = astop_rval_get(op);
-    printf("%s = ", astval_string_get(rval)); /* an identifier */
+    fprintf(stdout, "%s = ", astval_string_get(rval)); /* an identifier */
 
     AstVal lval = astop_lval_get(op);
     compile_astval(lval);
-    printf(";\n");
+    fprintf(stdout, ";\n");
 
 }
 
@@ -141,49 +140,49 @@ void compile_print(AstOp op)
 {
     AstVal label = astop_rval_get(op);
     if(label != NULL) {
-        printf("printf(\"%%s\", %s);\n", astval_string_get(label));
+        fprintf(stdout, "printf(\"%%s\", %s);\n", astval_string_get(label));
     }
 
     AstVal value = astop_lval_get(op);
     if(value == NULL) {
-        printf("printf(\"\\n\");\n");
+        fprintf(stdout, "printf(\"\\n\");\n");
         return;
     }
 
     switch(astval_type_get(value)) {
-        case IDENTIFIER: printf("printf(\"%%d\\n\",%s) ", astval_string_get(value));break;
+        case IDENTIFIER: fprintf(stdout, "printf(\"%%d\\n\",%s) ", astval_string_get(value));break;
         case STRING: break;
-        case NUMBER: printf("printf(\"%d\\n\") ", astval_number_get(value));break;
+        case NUMBER: fprintf(stdout, "printf(\"%d\\n\") ", astval_number_get(value));break;
         case BOOLEAN: {
             if(astval_number_get(value)) {
-                printf("printf(\"true\\n\") ");
+                fprintf(stdout, "printf(\"true\\n\") ");
                 break;
             } else {
-                printf("printf(\"false\\n\") ");
+                fprintf(stdout, "printf(\"false\\n\") ");
                 break;
             }
         }
         case OP: 
-                     printf("printf(\"%%d\\n\",");
+                     fprintf(stdout, "printf(\"%%d\\n\",");
                      compile_op(astval_op_get(value));
-                     printf(")");
+                     fprintf(stdout, ")");
                      break;
     }
 
-    printf(";\n");
+    fprintf(stdout, ";\n");
 }
 
 void compile_if(AstOp op)
 {
-    printf("if (");
+    fprintf(stdout, "if (");
     AstVal expression = astop_rval_get(op);
     compile_astval(expression);
-    printf(") {\n");
+    fprintf(stdout, ") {\n");
 
     AstVal statments = astop_lval_get(op);
     compile_astval(statments);
 
-    printf("}\n");
+    fprintf(stdout, "}\n");
 }
 
 void compile_else(AstOp op)
@@ -192,35 +191,35 @@ void compile_else(AstOp op)
     AstOp if_op = astval_op_get(if_exp);
     compile_if(if_op);
 
-    printf("else {\n");
+    fprintf(stdout, "else {\n");
 
     AstVal statments = astop_lval_get(op);
     compile_astval(statments);
 
-    printf("}\n");
+    fprintf(stdout, "}\n");
 }
 
 void compile_while(AstOp op)
 {
-    printf("while (");
+    fprintf(stdout, "while (");
     AstVal expression = astop_rval_get(op);
     compile_astval(expression);
-    printf(") {\n");
+    fprintf(stdout, ") {\n");
 
     AstVal statments = astop_lval_get(op);
     compile_astval(statments);
 
-    printf("}\n");
+    fprintf(stdout, "}\n");
 }
 
 void compile_stop(AstOp op)
 {
-    printf("break;\n");
+    fprintf(stdout, "break;\n");
 }
 
 void compile_next(AstOp op)
 {
-    printf("continue;\n");
+    fprintf(stdout, "continue;\n");
 }
 
 void compile_op(AstOp op)
@@ -261,16 +260,10 @@ void compile_op(AstOp op)
 
 void compile_root(AstOp op)
 {
-    printf("#include <stdio.h>\n");
-    printf("#include <stdlib.h>\n");
-    printf("#include <math.h>\n");
-    printf("\n");
-    printf("int main()\n");
-    printf("{\n");
+    fprintf(stdout, "#include <stdio.h>\n");
+    fprintf(stdout, "#include <stdlib.h>\n");
+    fprintf(stdout, "#include <math.h>\n");
+    fprintf(stdout, "\n");
 
     compile_op(op);
-
-    printf("return 0;\n");
-    printf("}\n");
 }
-

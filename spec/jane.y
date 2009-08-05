@@ -21,13 +21,20 @@ int usage()
 
 int main(int argc, char** argv)
 {
-    if(argc < 2) {
+    if(argc != 2) {
         usage();
         return 0;
     }
 
+    const char* infilename = argv[1];
+    const char* outfilename = "jane.out.c";
+
     fclose(stdin);
-    stdin = fopen(argv[1], "r"); 
+    stdin = fopen(infilename, "r"); 
+
+    fclose(stdout);
+    stdout = fopen(outfilename, "w"); 
+
     yyparse();
 
     return 0;
