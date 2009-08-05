@@ -95,6 +95,8 @@ statement:
          |
          statement_next TOK_SEMI { $<astop>$ = $<astop>1; }
          |
+         statement_return TOK_SEMI { $<astop>$ = $<astop>1; }
+         |
          statement_if { $<astop>$ = $<astop>1; }
          |
          statement_fun_define
@@ -140,6 +142,10 @@ statement_stop:
 
 statement_next:
               TOK_NEXT { $<astop>$ = astop_new(OP_NEXT, NULL, NULL); }
+              ;
+
+statement_return:
+              TOK_RETURN expression_arithmetic { $<astop>$ = astop_new(OP_RETURN, $<astval>2, NULL); }
               ;
 
 statement_if:
