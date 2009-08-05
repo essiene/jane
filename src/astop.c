@@ -43,6 +43,11 @@ void astop_printf(AstOp a)
         case OP_WHILE: printf("{OP_WHILE: ");break;
         case OP_STOP: printf("{OP_STOP: ");break;
         case OP_NEXT: printf("{OP_NEXT: ");break;
+        case OP_RETURN: printf("{OP_RETURN: ");break;
+        case OP_FUN: printf("{OP_FUN: ");break;
+        case OP_FUNBODY: printf("{OP_FUNBODY: ");break;
+        case OP_CALL: printf("{OP_CALL: ");break;
+        case OP_COMMA: printf("{OP_COMMA: ");break;
     }
 
     if(a->rval != NULL) {
