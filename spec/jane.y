@@ -95,6 +95,8 @@ statement:
          statement_next TOK_SEMI { $<astop>$ = $<astop>1; }
          |
          statement_if { $<astop>$ = $<astop>1; }
+         |
+         statement_fun_define
          ;
 
 statement_declare:
@@ -153,6 +155,22 @@ statement_if:
                 $<astop>$ = astop_new(OP_ELSE, astval_op_new(op_if), astval_op_new($<astop>8));
             }
             ;
+
+statement_fun_define:
+                    TOK_FUN TOK_IDENTIFIER TOK_OPAREN list_param TOK_EPAREN TOK_OBRACE
+                        statements
+                    TOK_EBRACE {
+                        AstOp fun_body = astop_new(OP_FUNBODY, astval_op_new($<astop>4), astval_op_new($<astop>7));
+                        $<astop>$ = astop_new(OP_FUN, astval_identifier_new($<string>2), astval_op_new(fun_body));
+                    }
+                    |
+                    TOK_FUN TOK_IDENTIFIER TOK_OPAREN TOK_EPAREN TOK_OBRACE
+                        statements
+                    TOK_EBRACE {
+                        AstOp fun_body = astop_new(OP_FUNBODY, NULL, astval_op_new($<astop>6));
+                        $<astop>$ = astop_new(OP_FUN, astval_identifier_new($<string>2), astval_op_new(fun_body));
+                    }
+                    ;
 
 expression_boolean: 
                   expression_boolean TOK_AND factor_boolean {
@@ -226,5 +244,30 @@ atom:
     TOK_IDENTIFIER { $<astval>$ = astval_identifier_new($<string>1); }
     |
     TOK_NUMBER { $<astval>$ = astval_number_new($<number>1); }
+    |
+    fun_call { $<astval>$ = astval_op_new($<astop>1); }
     ;
+
+fun_call:
+        TOK_IDENTIFIER TOK_OPAREN list_arg TOK_EPAREN {
+            $<astop>$ = astop_new(OP_CALL, astval_identifier_new($<string>1), astval_op_new($<astop>3));
+        }
+        ;
+
+list_arg:
+          expression_arithmetic TOK_COMMA list_arg {
+            $<astop>$ = astop_new(OP_COMMA, $<astval>1, astval_op_new($<astop>3));
+          }
+          |
+          expression_arithmetic { $<astop>$ = astop_new(OP_COMMA, $<astval>1, NULL); }
+          ;
+
+list_param:
+          TOK_IDENTIFIER TOK_COMMA list_param {
+            $<astop>$ = astop_new(OP_COMMA, astval_identifier_new($<string>1), astval_op_new($<astop>3));
+          }
+          |
+          TOK_IDENTIFIER { $<astop>$ = astop_new(OP_COMMA, astval_identifier_new($<string>1), NULL); }
+          ;
+
 %%
