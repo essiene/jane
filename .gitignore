@@ -4,3 +4,5 @@ janec
 *.o
 lex.yy.c
 y.tab.*
+*.out.c
+examples/*.c
